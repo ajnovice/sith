@@ -8,15 +8,17 @@ void graphColoring::addEdge(int v, int w)
     adj[w].push_back(v);
 }
 
-void graphColoring::greedyColoring(int v, int w)
+QVector <int> graphColoring::greedyColoring()
 {
 
     // Assign the first color to first vertex
-    color[0]  = 0;
+    color.push_back(0);
 
+    qDebug() << "Reached till here!";
     // Initialize remaining V-1 vertices as unassigned
     for (int u = 1; u < V; u++)
-        color[u] = -1;  // no color is assigned to u
+        color.push_back(-1);  // no color is assigned to u
+
 
     // A temporary array to store the available colors. True
     // value of available[cr] would mean that the color cr is
@@ -32,25 +34,39 @@ void graphColoring::greedyColoring(int v, int w)
         // as unavailable
         QList<int>::iterator i;
         for (i = adj[u].begin(); i != adj[u].end(); ++i)
+        {
             if (color[*i] != -1)
+            {
                 available[color[*i]] = true;
+            }
+        }
 
         // Find the first available color
         int cr;
         for (cr = 0; cr < V; cr++)
+        {
             if (available[cr] == false)
+            {
                 break;
+            }
+        }
 
         color[u] = cr; // Assign the found color
 
         // Reset the values back to false for the next iteration
         for (i = adj[u].begin(); i != adj[u].end(); ++i)
+        {
             if (color[*i] != -1)
+            {
                 available[color[*i]] = false;
+            }
+        }
     }
 
     // print the color
     for (int u = 0; u < V; u++)
-        qDebug() << "Vertex " << u << " --->  Color "
-             << color[u] << endl;
+    {
+        qDebug() << "Vertex " << u << " --->  Color " << color[u] << endl;
+    }
+    return color;
 }

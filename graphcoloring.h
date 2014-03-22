@@ -23,7 +23,7 @@ public:
 
     void addEdge(int v, int w);
 
-    void greedyColoring(int v, int w);
+    QVector<int> greedyColoring();
 };
 
 #endif // GRAPHCOLORING_H
