@@ -17,12 +17,14 @@ SOURCES += main.cpp\
     creategraphscene.cpp \
     graphcoloring.cpp \
     decryption.cpp \
-    fakemessages.cpp
+    fakemessages.cpp \
+    gcolor.cpp
 
 HEADERS  += mainwindow.h \
     creategraphscene.h \
     graphcoloring.h \
     decryption.h \
-    fakemessages.h
+    fakemessages.h \
+    gcolor.h
 
 FORMS    += mainwindow.ui
