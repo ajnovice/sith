@@ -92,7 +92,13 @@ QMap <char, char> decryption::getMap(QString para)
     return map;
 }
 
-QString decryption::getDecrypted(QString, QMap<char, char>)
+QString decryption::getDecrypted(QString input, QMap<char, char> decryptionKey)
 {
-    //Mayank, fill this function up
+    //does the decryption
+    for(int i=0;i<input.length();i++)
+    {
+	if(input[i].isLetter())
+	    input[i]=decryptionKey[input[i]];
+    }
+    return input;
 }
