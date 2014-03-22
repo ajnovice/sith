@@ -17,6 +17,12 @@ public:
      */
     QMap <char,char> getMap(QString);
 
+    /**
+     * @brief getDecrypted
+     * get decrypted string of the encrypted string provided as input
+     * @return
+     * QString of the decrypted string
+     */
     QString getDecrypted(QString, QMap <char, char>);
 
 
