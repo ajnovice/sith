@@ -15,6 +15,7 @@
 #include <QGraphicsEllipseItem>
 #include <QTextStream>
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -65,6 +66,21 @@ void MainWindow::on_pushButton_released() //display file
 
 void MainWindow::on_pushButton_2_released() // show graph
 {
+
+    int no_of_nodes=this->vertices.length();
+    int no_of_chhanel= this->edges.length();
+    for(int i=0;i<no_of_nodes;i++)
+    {
+        pair.append(qMakePair(vertices[i],i+1));
+    }
+
+    for(int i=0;i<no_of_chhanel;i++)
+    {
+        int index=pair.indexOf(' ');
+        string1=this->edges.left(index);
+        string2=this->edges.right(index+1);
+
+    }
 
 
 }
@@ -120,7 +136,7 @@ void MainWindow::on_pushButton_4_released() //open file
     this->decryptMap = dMap;
     qDebug() << dMap;
 
-    //Work on dividing the file, into lists of vertices
+    //Work on dividing the file, into lists of vertices(rebel bases)
     QList <QString> vertices = getVerticesList();
     qDebug() << vertices;
     this->vertices = vertices;

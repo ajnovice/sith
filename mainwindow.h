@@ -34,6 +34,8 @@ private slots:
 
 protected:
     QString paragraph;
+    QString string1;
+    QString string2;
     QList <QString> vertices;
     QList <QString> edges;
     QList <QString> messages;

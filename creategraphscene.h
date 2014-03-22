@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include <QVector>
 #include <QVector2D>
+#include <QList>
+#include <QPair>
 
 class CreateGraphScene
 {
@@ -14,11 +16,13 @@ public:
     QGraphicsEllipseItem* ellipse;
     QGraphicsRectItem* rectangle;
 
+    Qlist<Qpair<QString,int> > pair;
     void SetGraph(int, int, QVector2D);
     void drawGraph();
 
 private:
     QVector2D graph;
+
 
 
 };

@@ -14,5 +14,5 @@ void CreateGraphScene::SetGraph(int rows, int columns, QVector2D inputGraph)
 void CreateGraphScene::drawGraph()
 {
 
-    //
+
 }
