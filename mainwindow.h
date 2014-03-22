@@ -31,11 +31,19 @@ private slots:
 
     void on_pushButton_5_released();
 
+protected:
+    QString paragraph;
+    QList <QString> vertices;
+    QList <QString> edges;
+    QList <QString> messages;
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
     QGraphicsEllipseItem* ellipse;
     QGraphicsRectItem* rectangle;
+
+
 
     /**
      * @brief getParagraph

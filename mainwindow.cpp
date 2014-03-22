@@ -79,21 +79,27 @@ void MainWindow::on_pushButton_4_released() //open file
 
     //Divide the whole file into 3 strings
     QString newPara = getNewsParagraph();
+    this->paragraph = newPara;
 
     //Get the decrypted file
-    //decryption Dec = new decryption();
+    decryption Dec;
+    QMap <char, char> encryptionMap = Dec.getMap(newPara);
+    qDebug() << encryptionMap;
 
     //Work on dividing the file, into lists of vertices
     QList <QString> vertices = getVerticesList();
     qDebug() << vertices;
+    this->vertices = vertices;
 
     //Get edges
     QList <QString> edges = getChannels();
     qDebug() << edges;
+    this->edges = edges;
 
     //Get Messages
     QList <QString> messages = getMessages();
     qDebug() << messages;
+    this->messages = messages;
 
     //Form Graph
 

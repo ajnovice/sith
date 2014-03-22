@@ -84,6 +84,7 @@ QMap <char, char> decryption::getMap(QString para)
             for(int i=0;i<teststr.length();i++)
             {
                 // character para[si+i] is mapped to character teststr[i]
+                map[para[si+i].toAscii()] = teststr[i].toAscii();
             }
             break;
         }
