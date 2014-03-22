@@ -1,9 +1,17 @@
+//local includes
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "creategraphscene.h"
+#include "graphcoloring.h"
+
+//Qt Includes
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QGraphicsItem>
+#include <QGraphicsEllipseItem>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -51,4 +59,18 @@ void MainWindow::on_pushButton_4_released()
     }
     qDebug() << "File opened successfully";
     this->inFile.setFileName(fileName);
+
+    //display graph
+    scene = new QGraphicsScene(this);
+    ui->graphicsView->setScene(scene);
+
+    QBrush redBrush(Qt::red);
+    QBrush blueBrush(Qt::blue);
+    QPen blackPen(Qt::black);
+    blackPen.setWidth(2);
+
+    ellipse = scene->addEllipse(0,0,100,100,blackPen,redBrush);
+    ellipse = scene->addEllipse(100,200,50,50,blackPen,blueBrush);
+    ui->graphicsView->show();
+
 }

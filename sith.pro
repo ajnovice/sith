@@ -13,8 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    creategraphscene.cpp \
+    graphcoloring.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    creategraphscene.h \
+    graphcoloring.h
 
 FORMS    += mainwindow.ui
