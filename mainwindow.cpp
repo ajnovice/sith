@@ -31,7 +31,36 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_released() //display file
 {
+    inFile.open(QFile::ReadOnly | QFile::Text);
+    QTextStream in(&inFile);
 
+    //extracting all text from input file
+    QString mText = in.readAll();
+    inFile.close();
+
+    //test output of string
+    qDebug() << "Test of QString:";
+    qDebug() << mText;
+
+    //using decryption class and decrypting the whole text
+    decryption Dec;
+    mText = Dec.getDecrypted(mText,this->decryptMap);
+
+    //test output of decrypted string
+    qDebug() << "Test output of decrypted String";
+    qDebug() << mText;
+
+    //adding new scene
+    scene = new QGraphicsScene(this);
+
+    //setting graphics view to view scene
+    ui->graphicsView->setScene(scene);
+
+    //adding text to scene
+    text = scene->addText(mText);
+
+    //showing graphicsView
+    ui->graphicsView->show();
 }
 
 void MainWindow::on_pushButton_2_released() // show graph
@@ -64,27 +93,32 @@ void MainWindow::on_pushButton_4_released() //open file
     this->inFile.setFileName(fileName);
 
     //display graph -- Remove
-    scene = new QGraphicsScene(this);
-    ui->graphicsView->setScene(scene);
+    //scene = new QGraphicsScene(this);
+    //ui->graphicsView->setScene(scene);
 
     QBrush redBrush(Qt::red);
     QBrush blueBrush(Qt::blue);
     QPen blackPen(Qt::black);
     blackPen.setWidth(2);
 
-    ellipse = scene->addEllipse(0,0,100,100,blackPen,redBrush);
-    ellipse = scene->addEllipse(100,200,50,50,blackPen,blueBrush);
-    ui->graphicsView->show();
+    //ellipse = scene->addEllipse(0,0,100,100,blackPen,redBrush);
+    //ellipse = scene->addEllipse(100,200,50,50,blackPen,blueBrush);
+    //ui->graphicsView->show();
+
     //--Remove till here
 
     //Divide the whole file into 3 strings
     QString newPara = getNewsParagraph();
     this->paragraph = newPara;
 
+//    text = scene->addText(newPara);
+//    scene->clear();
+//    ui->graphicsView->show();
     //Get the decrypted file
     decryption Dec;
-    QMap <char, char> encryptionMap = Dec.getMap(newPara);
-    qDebug() << encryptionMap;
+    QMap <char, char> dMap = Dec.getMap(newPara);
+    this->decryptMap = dMap;
+    qDebug() << dMap;
 
     //Work on dividing the file, into lists of vertices
     QList <QString> vertices = getVerticesList();

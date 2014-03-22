@@ -97,8 +97,10 @@ QString decryption::getDecrypted(QString input, QMap<char, char> decryptionKey)
     //does the decryption
     for(int i=0;i<input.length();i++)
     {
-	if(input[i].isLetter())
-	    input[i]=decryptionKey[input[i]];
+        if(input[i].isLetter())
+        {
+            input[i]=decryptionKey[input[i].toLower().toAscii()];
+        }
     }
     return input;
 }

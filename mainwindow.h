@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFile>
 #include <QGraphicsScene>
+#include <QMap>
 
 namespace Ui {
 class MainWindow;
@@ -36,12 +37,14 @@ protected:
     QList <QString> vertices;
     QList <QString> edges;
     QList <QString> messages;
+    QMap <char, char> decryptMap;
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
     QGraphicsEllipseItem* ellipse;
     QGraphicsRectItem* rectangle;
+    QGraphicsTextItem* text;
 
 
 
