@@ -24,12 +24,12 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>105</width>
+      <width>120</width>
       <height>441</height>
      </rect>
     </property>
@@ -52,6 +52,13 @@
       <widget class="QPushButton" name="pushButton_2">
        <property name="text">
         <string>Show Graph</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="text">
+        <string>Edit Messages</string>
        </property>
       </widget>
      </item>

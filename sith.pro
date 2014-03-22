@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     creategraphscene.cpp \
-    graphcoloring.cpp
+    graphcoloring.cpp \
+    decryption.cpp
 
 HEADERS  += mainwindow.h \
     creategraphscene.h \
-    graphcoloring.h
+    graphcoloring.h \
+    decryption.h
 
 FORMS    += mainwindow.ui
