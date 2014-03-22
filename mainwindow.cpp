@@ -67,20 +67,20 @@ void MainWindow::on_pushButton_released() //display file
 void MainWindow::on_pushButton_2_released() // show graph
 {
 
-    int no_of_nodes=this->vertices.length();
-    int no_of_chhanel= this->edges.length();
-    for(int i=0;i<no_of_nodes;i++)
-    {
-        pair.append(qMakePair(vertices[i],i+1));
-    }
+//    int no_of_nodes=this->vertices.length();
+//    int no_of_chhanel= this->edges.length();
+//    for(int i=0;i<no_of_nodes;i++)
+//    {
+//        pair.append(qMakePair(vertices[i],i+1));
+//    }
 
-    for(int i=0;i<no_of_chhanel;i++)
-    {
-        int index=pair.indexOf(' ');
-        string1=this->edges.left(index);
-        string2=this->edges.right(index+1);
+//    for(int i=0;i<no_of_chhanel;i++)
+//    {
+//        int index=pair.indexOf(' ');
+//        string1=this->edges.left(index);
+//        string2=this->edges.right(index+1);
 
-    }
+//    }
 
 
 }
@@ -231,7 +231,7 @@ QString MainWindow::getNewsParagraph()
     QTextStream in(&inFile);
 
     QString mText = in.readLine();
-    mText=in.readLine();
+    mText=in.readAll();
     qDebug() << mText;
     inFile.close();
     return mText;

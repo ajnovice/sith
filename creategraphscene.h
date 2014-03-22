@@ -16,7 +16,7 @@ public:
     QGraphicsEllipseItem* ellipse;
     QGraphicsRectItem* rectangle;
 
-    Qlist<Qpair<QString,int> > pair;
+    QList<QPair<QString,int> > pair;
     void SetGraph(int, int, QVector2D);
     void drawGraph();
 
