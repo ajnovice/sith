@@ -2,6 +2,8 @@
 
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
+
 FakeMessages::FakeMessages()
 {
 }
@@ -12,7 +14,8 @@ QList<QString> FakeMessages::generate(QString originalMessage, int n)
     int extra=0;
     int wordcount=100;
     int filecount=0;
-    QTextStream textStream;
+    QString filename;
+    //    QTextStream textStream;
     if(n>12000)
     {
         //error and kill cannot handle more than 12000 bases.
@@ -23,17 +26,30 @@ QList<QString> FakeMessages::generate(QString originalMessage, int n)
         {
             if(wordcount==100)
             {
-                QFile textFile("messages/msgfile"+QString::number(filecount)+".txt");
-                textStream.setDevice(&textFile);
+                filename = "messages/msgfile" + QString::number(filecount)+ ".txt";
                 filecount++;
             }
+            qDebug() << "the filename to be opened is: " << filename;
+            QFile textFile(filename);
+            if(!textFile.open(QFile::ReadOnly | QFile::Text))
+            {
+                qDebug() << "could not open file for read";
+                return fakeMsgs;
+            }
+            QTextStream textStream(&textFile);
+
+
             QString line = textStream.readLine();
             if (line.isNull())
+            {
                 wordcount=100;
+            }
             else
             {
                 if (line==originalMessage)
-                        extra+=1;
+                {
+                    extra+=1;
+                }
                 else
                 {
                     fakeMsgs.append(line);
@@ -43,5 +59,6 @@ QList<QString> FakeMessages::generate(QString originalMessage, int n)
 
         }
     }
+    qDebug() << "FakeMessages: Generated messages, returning";
     return fakeMsgs;
 }

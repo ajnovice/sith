@@ -6,6 +6,7 @@
 #include "graphcoloring.h"
 #include "decryption.h"
 #include "gcolor.h"
+#include "fakemessages.h"
 
 //Qt Includes
 #include <QDebug>
@@ -211,17 +212,53 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
         //--- test printing----
         qDebug()<<"Base1:"<<base1<<"Base2:"<<base2;
     }
+
+
     qDebug() << "Coloring of graph";
     QVector <int> g1Color = g1.greedyColoring();
     qDebug() << "vector is: " << g1Color;
+    //now making initial message the most used message
+    g1Color = g1.sortMessages(rebelBaseCount,g1Color);
+    qDebug() << "Sorted Vector is : " << g1Color;
+
+    int messageCount = g1.messageCount(rebelBaseCount, g1Color);
+
+    QString messageOutput;
+    messageOutput = QString::number(messageCount);
+    messageOutput = messageOutput + "\n";
+
+    FakeMessages fm;
+
+    QList <QString> fMsgs = fm.generate(this->messages[0],messageCount);
+
+    qDebug() << "Fake messages generated";
+
+    for ( i = 0 ; i < rebelBaseCount ; i++ )
+    {
+        messageOutput = messageOutput + this->vertices[i] + ": " + fMsgs[g1Color[i]] + "\n";
+    }
+
+    //adding new scene
+    scene = new QGraphicsScene(this);
+
+    //setting graphics view to view scene
+    ui->graphicsView->setScene(scene);
+
+    //adding text to scene
+    text = scene->addText(messageOutput);
+
+    //showing graphicsView
+    ui->graphicsView->show();
 
     qDebug() << "Trying out the 2nd program";
+
+    /*
     gColor g;
     g.GetInput(vertices,edges);
     g.Init();
     g.Coloring();
     g.PrintOutput();
-
+    */
     //Convert QList <QString> edges into two parts
 
     //Get colored Graph
@@ -240,6 +277,8 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     qDebug() << g1Color;
 
     */
+
+
     graphColoring g2(5);
     g2.addEdge(0, 1);
     g2.addEdge(0, 2);

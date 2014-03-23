@@ -24,6 +24,16 @@ public:
     void addEdge(int v, int w);
 
     QVector<int> greedyColoring();
+
+    /**
+     * @brief sortMessages
+     * To make sure that the initial message is used the most
+     * @param Output of greedyColoring
+     * @return
+     */
+    QVector<int> sortMessages(int nVertices, QVector<int> input);
+
+    int messageCount (int nVertices, QVector <int> input);
 };
 
 #endif // GRAPHCOLORING_H

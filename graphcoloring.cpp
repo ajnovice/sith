@@ -70,3 +70,76 @@ QVector <int> graphColoring::greedyColoring()
     }
     return color;
 }
+
+QVector<int> graphColoring::sortMessages(int nVertices, QVector<int> input)
+{
+    int repitition[nVertices];
+    int temp, pos, i;
+    //initialize repitition to 0
+    for (i = 0 ; i < nVertices ; i++ )
+    {
+        repitition[i] = 0;
+    }
+
+    //filling repitition with data from QVector input
+    for (i = 0 ; i < nVertices ; i ++ )
+    {
+        temp = input[i];
+        repitition[temp] = repitition[temp] + 1;
+    }
+
+    //finding max in repitition
+    temp = repitition[0];
+    pos = 0;
+    for (i = 0 ; i < nVertices ; i++)
+    {
+        if (repitition[i] > temp)
+        {
+            temp = repitition[i];
+            pos = i;
+        }
+    }
+
+    //now swapping 0 with the number having highest value
+    //Step 1. Swap "pos" in QVector with "nVertices"
+    for (i = 0 ; i < nVertices ; i ++)
+    {
+        if (input[i] == pos)
+        {
+            input[i] = nVertices;
+        }
+    }
+    //Step 2. Swap "0" in QVector with pos
+    for (i = 0 ; i < nVertices ; i ++ )
+    {
+        if (input[i] == 0)
+        {
+            input[i] = pos;
+        }
+    }
+    //Step 3. Swap "nVertices" in QVector with "0"
+    for (i = 0 ; i < nVertices ; i ++ )
+    {
+        if (input[i] == nVertices)
+        {
+            input[i] = 0;
+        }
+    }
+    return input;
+
+}
+
+int graphColoring::messageCount(int nVertices, QVector<int> input)
+{
+    int i;
+    int max = 0;
+    for (i = 0; i < nVertices; i++ )
+    {
+        if (input[i] > max)
+        {
+            max = input[i];
+        }
+    }
+    max += 1;
+    return max;
+}
