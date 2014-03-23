@@ -37,10 +37,25 @@ private slots:
      */
     void on_pushButton_2_released();
 
+    /**
+     * @brief on_pushButton_3_released
+     * function which determines action when "Export File" button is pressed
+     * the function exports the file to output
+     */
     void on_pushButton_3_released();
 
+    /**
+     * @brief on_pushButton_4_released
+     * function which determines action when "Open File" button is pressed
+     * the function displays file dialog to open the input file
+     */
     void on_pushButton_4_released();
 
+    /**
+     * @brief on_pushButton_5_released
+     * function which determines action when "Edit Messages" button is pressed
+     * the function displays the changes messages and respective bases along with it
+     */
     void on_pushButton_5_released();
 
 protected:
