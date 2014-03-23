@@ -7,6 +7,7 @@
 #include "decryption.h"
 #include "gcolor.h"
 #include "fakemessages.h"
+#include "basicdictionary.h"
 
 //Qt Includes
 #include <QDebug>
@@ -227,6 +228,19 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     messageOutput = QString::number(messageCount);
     messageOutput = messageOutput + "\n";
 
+    basicDictionary bd;
+
+    QList <QString> fakeMsgs = bd.getWordList(this->messages[0], messageCount);
+
+    qDebug() << "Fake messages generated: ";
+
+    for ( i = 0 ; i < rebelBaseCount ; i++ )
+    {
+        messageOutput = messageOutput + this->vertices[i] + ": " + fakeMsgs[g1Color[i]] + "\n";
+    }
+
+    /*
+
     FakeMessages fm;
 
     QList <QString> fMsgs = fm.generate(this->messages[0],messageCount);
@@ -237,6 +251,7 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     {
         messageOutput = messageOutput + this->vertices[i] + ": " + fMsgs[g1Color[i]] + "\n";
     }
+    */
 
     //adding new scene
     scene = new QGraphicsScene(this);

@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     graphcoloring.cpp \
     decryption.cpp \
     fakemessages.cpp \
-    gcolor.cpp
+    gcolor.cpp \
+    basicdictionary.cpp
 
 HEADERS  += mainwindow.h \
     creategraphscene.h \
     graphcoloring.h \
     decryption.h \
     fakemessages.h \
-    gcolor.h
+    gcolor.h \
+    basicdictionary.h
 
 FORMS    += mainwindow.ui
