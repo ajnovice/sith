@@ -20,7 +20,10 @@ SOURCES += main.cpp\
     decryption.cpp \
     fakemessages.cpp \
     gcolor.cpp \
-    basicdictionary.cpp
+    basicdictionary.cpp \
+    node.cpp \
+    edge.cpp \
+    edgemap.cpp
 
 HEADERS  += mainwindow.h \
     creategraphscene.h \
@@ -28,6 +31,9 @@ HEADERS  += mainwindow.h \
     decryption.h \
     fakemessages.h \
     gcolor.h \
-    basicdictionary.h
+    basicdictionary.h \
+    node.h \
+    edge.h \
+    edgemap.h
 
 FORMS    += mainwindow.ui
