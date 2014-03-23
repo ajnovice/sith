@@ -35,6 +35,7 @@ private:
 
     QGraphicsScene* scene;
     QGraphicsEllipseItem* ellipse;
+    QGraphicsTextItem* text;
     QGraphicsRectItem* rectangle;
     QGraphicsLineItem* line;
 

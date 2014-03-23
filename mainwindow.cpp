@@ -5,8 +5,6 @@
 #include "creategraphscene.h"
 #include "graphcoloring.h"
 #include "decryption.h"
-#include "gcolor.h"
-#include "fakemessages.h"
 #include "basicdictionary.h"
 
 //Qt Includes
@@ -310,27 +308,13 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     */
 
     QString messageOutput;
-    messageOutput = QString::number(messageCount);
+    messageOutput = "Total Messages Used: " + QString::number(messageCount);
     messageOutput = messageOutput + "\n";
 
     for ( i = 0 ; i < rebelBaseCount ; i++ )
     {
         messageOutput = messageOutput + this->vertices[i] + ": " + this->editedMessages[this->graphColor[i]] + "\n";
     }
-
-    /*
-
-    FakeMessages fm;
-
-    QList <QString> fMsgs = fm.generate(this->messages[0],messageCount);
-
-    qDebug() << "Fake messages generated";
-
-    for ( i = 0 ; i < rebelBaseCount ; i++ )
-    {
-        messageOutput = messageOutput + this->vertices[i] + ": " + fMsgs[g1Color[i]] + "\n";
-    }
-    */
 
     //adding new scene
     scene = new QGraphicsScene(this);
@@ -343,62 +327,6 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
 
     //showing graphicsView
     ui->graphicsView->show();
-
-    qDebug() << "Trying out the 2nd program";
-
-
-    /*
-    gColor g;
-    g.GetInput(vertices,edges);
-
-    qDebug() << "Inserted Input";
-    g.Init();
-
-    qDebug() << "initialization done";
-    g.Coloring();
-
-    qDebug() << "coloring done";
-    g.PrintOutput();
-    */
-
-    //Convert QList <QString> edges into two parts
-
-    //Get colored Graph
-
-    /*
-    //test colored graph
-    graphColoring g1(5);
-    g1.addEdge(0, 1);
-    g1.addEdge(0, 2);
-    g1.addEdge(1, 2);
-    g1.addEdge(1, 3);
-    g1.addEdge(2, 3);
-    g1.addEdge(3, 4);
-    qDebug() << "Coloring of Graph 1 \n";
-    QVector <int> g1Color = g1.greedyColoring();
-    qDebug() << g1Color;
-
-    */
-
-
-    /*
-    graphColoring g2(5);
-    g2.addEdge(0, 1);
-    g2.addEdge(0, 2);
-    g2.addEdge(1, 2);
-    g2.addEdge(1, 4);
-    g2.addEdge(2, 4);
-    g2.addEdge(4, 3);
-    qDebug() << "\nColoring of Graph 2 \n";
-    QVector <int> g2Color = g2.greedyColoring();
-    qDebug() << g2Color;
-*/
-
-    //Show message count
-
-    //Show messages
-
-
 }
 
 QMap<char, char> MainWindow::reverseMap(QMap<char, char> input)

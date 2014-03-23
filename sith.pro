@@ -18,8 +18,6 @@ SOURCES += main.cpp\
     creategraphscene.cpp \
     graphcoloring.cpp \
     decryption.cpp \
-    fakemessages.cpp \
-    gcolor.cpp \
     basicdictionary.cpp \
     node.cpp \
     edge.cpp \
@@ -29,7 +27,6 @@ HEADERS  += mainwindow.h \
     creategraphscene.h \
     graphcoloring.h \
     decryption.h \
-    fakemessages.h \
     gcolor.h \
     basicdictionary.h \
     node.h \

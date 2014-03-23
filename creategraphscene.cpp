@@ -42,6 +42,8 @@ QGraphicsScene *CreateGraphScene::getGraphicsScene()
         line = scene->addLine(l,blackPen);
     }
     QPoint v;
+    QFont f("Calibri",7,-1,true);
+
     for ( i = 0; i < this->vertex.length(); i++)
     {
         v = this->eMap.n.getNode(i);
