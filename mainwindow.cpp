@@ -286,13 +286,21 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
 
     qDebug() << "Trying out the 2nd program";
 
+
     /*
     gColor g;
     g.GetInput(vertices,edges);
+
+    qDebug() << "Inserted Input";
     g.Init();
+
+    qDebug() << "initialization done";
     g.Coloring();
+
+    qDebug() << "coloring done";
     g.PrintOutput();
     */
+
     //Convert QList <QString> edges into two parts
 
     //Get colored Graph
