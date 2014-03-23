@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("SITH - Join the Dark Side");
 //    const QPixmap pix(":/dw_sith.jpg");
 //    ui->label->setPixmap(pix);
 }

@@ -1,0 +1,43 @@
+Manual for Application
+======================
+
+The application features a single window usage for simple interface and easy controlling and disrupting enemy bases.
+
+The User Interface contains:
+1. Buttons
+2. GraphicsView
+
+Buttons
+-------
+1. Open File
+2. Display File
+3. Show Graph
+4. Edit Messages
+5. Export File
+
+Button descriptions are in detail:
+
+1. Open File
+
+Gives a file dialog box to open the encrypted file. Please make sure that you're opening a .txt file, with standard encoding.
+
+2. Display File
+
+This decrypts the file, and shows it on the GraphicsView. 
+
+3. Show Graph
+
+This shows the Graph showing the Rebel bases as vertices and Channels as edges
+
+4. Edit Messages
+
+Edits the messages as no two adjacent rebel base gets the same message, shows the output of which city gets which message
+
+5. Export File
+
+Exports / Saves the file as "<filename> - edited.txt" in the location of the input file.
+
+Graphics View
+-------------
+
+The Graphics View shows output of files, edited messages, and even graphs for temporal viewing.
