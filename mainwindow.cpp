@@ -5,6 +5,7 @@
 #include "creategraphscene.h"
 #include "graphcoloring.h"
 #include "decryption.h"
+#include "gcolor.h"
 
 //Qt Includes
 #include <QDebug>
@@ -138,18 +139,40 @@ void MainWindow::on_pushButton_4_released() //open file
 
     //Work on dividing the file, into lists of vertices(rebel bases)
     QList <QString> vertices = getVerticesList();
-    qDebug() << vertices;
     this->vertices = vertices;
 
-    //Get edges
+    //decrypt Vertices
+    for (int i = 0 ; i < this->vertices.length() ; i ++)
+    {
+        this->vertices[i] = Dec.getDecrypted(this->vertices[i],dMap);
+    }
+
+    //Get edges (communication channels)
     QList <QString> edges = getChannels();
-    qDebug() << edges;
     this->edges = edges;
+
+    //decrypt Edges
+    for (int i = 0 ; i < this->edges.length() ; i ++)
+    {
+        this->edges[i] = Dec.getDecrypted(this->edges[i],dMap);
+    }
 
     //Get Messages
     QList <QString> messages = getMessages();
-    qDebug() << messages;
     this->messages = messages;
+
+    //decrypt Messages
+    for (int i = 0 ; i < this->messages.length() ; i ++)
+    {
+        this->messages[i] = Dec.getDecrypted(this->messages[i],dMap);
+    }
+
+
+    //Test Print
+    qDebug() << "Vertices (Rebel Bases) : " << this->vertices;
+    qDebug() << "Edges (Communication Channels) : " << this->edges;
+    qDebug() << "Messages :" << this->messages;
+
 
     //Form Graph
 
@@ -163,7 +186,7 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
 
     int rebelBaseCount = this->vertices.length();
     int spacePos;
-    int i;
+    int i,temp;
     QString base1;
     QString base2;
     QMap <QString, int> baseIndex;
@@ -178,7 +201,11 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     {
         spacePos = this->edges[i].indexOf(' ');
         base1=this->edges[i].left(spacePos);
-        base2=this->edges[i].right(spacePos+1);
+        temp = this->edges[i].length() - spacePos -1;
+        base2=this->edges[i].right(temp);
+        qDebug() << "Test of Base Index";
+        qDebug() << baseIndex[base1];
+        qDebug() << baseIndex[base2];
         g1.addEdge(baseIndex[base1], baseIndex[base2]);
 
         //--- test printing----
@@ -187,6 +214,13 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     qDebug() << "Coloring of graph";
     QVector <int> g1Color = g1.greedyColoring();
     qDebug() << "vector is: " << g1Color;
+
+    qDebug() << "Trying out the 2nd program";
+    gColor g;
+    g.GetInput(vertices,edges);
+    g.Init();
+    g.Coloring();
+    g.PrintOutput();
 
     //Convert QList <QString> edges into two parts
 
@@ -341,7 +375,7 @@ QList<QString> MainWindow::getMessages()
                 break;
         }
     }
-    qDebug() << count;
+
     //reached third blank line
     mText = in.readLine();
     //now the list starts
@@ -356,6 +390,7 @@ QList<QString> MainWindow::getMessages()
         }
         list.append(mText);
     }
+
     inFile.close();
     return list;
 }
