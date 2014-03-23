@@ -35,7 +35,7 @@ Edits the messages as no two adjacent rebel base gets the same message, shows th
 
 5. Export File
 
-Exports / Saves the file as "<filename> - edited.txt" in the location of the input file.
+Exports / Saves the file as "<filename> - edited.txt" in the location of the input file. The re-encrypted file is saved.
 
 Graphics View
 -------------
