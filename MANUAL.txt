@@ -18,26 +18,37 @@ Buttons
 Button descriptions are in detail:
 
 1. Open File
+............
 
-Gives a file dialog box to open the encrypted file. Please make sure that you're opening a .txt file, with standard encoding.
+Gives a file dialog box to open the encrypted file. Please make sure that 
+you're opening a .txt file, with standard encoding.
 
 2. Display File
+...............
 
 This decrypts the file, and shows it on the GraphicsView. 
 
 3. Show Graph
+.............
 
-This shows the Graph showing the Rebel bases as vertices and Channels as edges
+This shows the Graph showing the Rebel bases as vertices and Channels as edges.
+Though the Rebel Bases are not labeled, it is easy to locate them, it is anti-
+clockwise from bottom, in the order given in the input file.
 
 4. Edit Messages
+................
 
-Edits the messages as no two adjacent rebel base gets the same message, shows the output of which city gets which message
+Edits the messages as no two adjacent rebel base gets the same message, shows
+the output of which city gets which message
 
 5. Export File
+..............
 
-Exports / Saves the file as "<filename> - edited.txt" in the location of the input file. The re-encrypted file is saved.
+Exports / Saves the file as "<filename> - edited.txt" in the location of the
+input file. The re-encrypted file is saved.
 
 Graphics View
 -------------
 
-The Graphics View shows output of files, edited messages, and even graphs for temporal viewing.
+The Graphics View shows output of files, edited messages, and even graphs for
+temporal viewing.

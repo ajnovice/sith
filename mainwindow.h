@@ -23,8 +23,18 @@ public:
     ~MainWindow();
 
 private slots:
+    /**
+     * @brief on_pushButton_released
+     * function which determines action when "Display File" button is pressed
+     * the function displays the decrypted value of the file in the GraphicsView
+     */
     void on_pushButton_released();
 
+    /**
+     * @brief on_pushButton_2_released
+     * function which determines action when "Show Graph" button is pressed
+     * the function displays the graph of the Bases and communication Channels
+     */
     void on_pushButton_2_released();
 
     void on_pushButton_3_released();
