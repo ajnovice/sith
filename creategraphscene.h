@@ -1,41 +1,42 @@
 #ifndef CREATEGRAPHSCENE_H
 #define CREATEGRAPHSCENE_H
 
+//Local Includes
+
+#include "node.h"
+#include "edgemap.h"
+#include "edge.h"
+
+//Qt Includes
 
 #include <QGraphicsScene>
-#include <QVector>
-#include <QVector2D>
 #include <QList>
-#include <QPair>
+#include <QString>
 
 class CreateGraphScene
 {
 public:
-    CreateGraphScene();
-    QGraphicsScene* scene;
-    QGraphicsEllipseItem* ellipse;
-    QGraphicsRectItem* rectangle;
-
-
-
+//    CreateGraphScene();
+    CreateGraphScene(QList <QString> base, QList <QString> channels);
 
 
     /**
-     * @brief SetGraph
-     * sets the basic graph model
-     * @param rows
-     * @param columns
-     * @param inputGraph
+     * @brief getGraphicsScene
+     * Gives back a GraphicsScene with the edges and nodes in it.
+     * @return
      */
-    void SetGraph(int rows, int columns, QVector<QVector<int> > inputGraph);
+    QGraphicsScene *getGraphicsScene();
 
-    void drawGraph();
-    QVector < QVector < int > > graph;
+private:
+    EdgeMap eMap;
+    Node nodes;
+    QList <QString> vertex;
+    QList <QString> edge;
 
-//private:
-
-
-
+    QGraphicsScene* scene;
+    QGraphicsEllipseItem* ellipse;
+    QGraphicsRectItem* rectangle;
+    QGraphicsLineItem* line;
 
 };
 

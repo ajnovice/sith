@@ -71,44 +71,13 @@ void MainWindow::on_pushButton_released() //display file
 
 void MainWindow::on_pushButton_2_released() // show graph
 {
-
-//    int no_of_nodes=this->vertices.length();
-//    int no_of_chhanel= this->edges.length();
-//    for(int i=0;i<no_of_nodes;i++)
-//    {
-//        pair.append(qMakePair(vertices[i],i+1));
-//    }
-
-//    for(int i=0;i<no_of_chhanel;i++)
-//    {
-//        int index=pair.indexOf(' ');
-//        string1=this->edges.left(index);
-//        string2=this->edges.right(index+1);
-//    }
-    int temp, index;
-    QMap<QString,int> map;
-    CreateGraphScene cgs;
-    int no_of_nodes=this->vertices.length();
-    int no_of_chhanel= this->edges.length();
-    for(int i=0;i<no_of_nodes;i++)
-    {
-        map.insert(vertices[i],i+1);
-    }
-
-    for(int i=0; i < no_of_chhanel; i++)
-    {
-        index   = this->edges[i].indexOf(' ');
-        temp    = this->edges[i].length() - index -1;
-        string1 = this->edges[i].left(index);
-        string2 = this->edges[i].right(temp);
-
-
-        //cgs.graph[map[string1]][map[string2]] = 1;
-        //cgs.graph[map[string2]][map[string1]] = 1;
-
-    }
-
-
+    qDebug() << "In pushButton_2_released function";
+    CreateGraphScene cgs(this->vertices, this->edges);
+    qDebug() << "Object Created";
+    scene = cgs.getGraphicsScene();
+    qDebug() << "Scene Received";
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->show();
 }
 
 void MainWindow::on_pushButton_3_released() //export file

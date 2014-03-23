@@ -3,6 +3,11 @@
 
 #include <QDebug>
 
+EdgeMap::EdgeMap()
+{
+
+}
+
 EdgeMap::EdgeMap(Node nodes, QList<QString> ch, QList<QString> bases, int nn)
 {
     this->n = nodes;
@@ -11,7 +16,13 @@ EdgeMap::EdgeMap(Node nodes, QList<QString> ch, QList<QString> bases, int nn)
     this->bases = bases;
 }
 
-QList<Edge> EdgeMap::returnList()
+void EdgeMap::createList()
+{
+    CreateBaseMap();
+    CreateEdgeList();
+}
+
+QList<QLine> EdgeMap::returnList()
 {
     CreateBaseMap();
     CreateEdgeList();
@@ -38,9 +49,9 @@ void EdgeMap::CreateEdgeList()
         qDebug() << baseMap[base2];
         pos1 = n.nodemap[baseMap[base1]];
         pos2 = n.nodemap[baseMap[base2]];
-        Edge e;
-        e.p1 = pos1;
-        e.p2 = pos2;
+        QLine e;
+        e.setP1(pos1);
+        e.setP2(pos2);
         edgeList.push_back(e);
 
         //--- test printing----

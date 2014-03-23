@@ -21,6 +21,8 @@ class Node
      */
     void setNNodes(int n);
 
+    void setNodes(Node n);
+
     /**
      * @brief getNode
      * @return
