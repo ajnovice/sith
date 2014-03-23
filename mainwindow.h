@@ -40,7 +40,10 @@ protected:
     QList <QString> vertices;
     QList <QString> edges;
     QList <QString> messages;
+    QList <QString> editedMessages;
+    QVector <int> graphColor;
     QMap <char, char> decryptMap;
+    QMap <char, char> encryptMap;
 
 private:
     Ui::MainWindow *ui;
@@ -49,6 +52,9 @@ private:
     QGraphicsEllipseItem* ellipse;
     QGraphicsRectItem* rectangle;
     QGraphicsTextItem* text;
+    int messageCount;
+    QString inputFileName;
+    QMap <char, char> reverseMap(QMap <char, char>);
 
 
 
@@ -84,6 +90,8 @@ private:
      * QString containing the list of messages(Messages)
      */
     QList <QString> getMessages();
+
+    QList <QString> editMessages();
 };
 
 #endif // MAINWINDOW_H

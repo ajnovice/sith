@@ -113,6 +113,81 @@ void MainWindow::on_pushButton_2_released() // show graph
 
 void MainWindow::on_pushButton_3_released() //export file
 {
+    //While exporting the file, the file should be the same as in the initial
+    //file till the last paragraph. In the last paragraph, we would have the
+    //edited messages instead of the original messages
+
+    //Step 1. Create output file name
+    QString outputFileName;
+    int index;
+    outputFileName = "";
+    index = this->inputFileName.lastIndexOf('.');
+    outputFileName = inputFileName.left(index);
+    outputFileName = outputFileName + "-edited" + ".txt";
+    qDebug() << "Output File Name: " << outputFileName;
+
+    //Step 2. Create output file stream
+    if (!inFile.open((QFile::ReadOnly | QFile::Text)))
+    {
+        qDebug() << "Could not read from file";
+        return;
+    }
+    QFile oFile(outputFileName);
+    if (!oFile.open(QFile::WriteOnly | QFile::Text))
+    {
+        qDebug() << "Could not open file to write";
+        return;
+    }
+    qDebug() << "File opened successfully";
+
+    //Step 3. Copy from input file to output file till the 3rd paragraph
+    QTextStream in(&inFile);
+    QTextStream out(&oFile);
+    QString mText;
+
+    //traverse till the third blank line
+    int flag = 0;
+    int count = 0;
+    while(true)
+    {
+        count ++;
+        mText = in.readLine();
+        qDebug() << mText;
+        out << mText << "\n";
+        if(mText.trimmed().length() == 0)
+        {
+            flag++;
+            qDebug() << count;
+            if (flag == 3)
+                break;
+        }
+    }
+    out << in.readLine();
+    out << "\n";
+    //Step 5. Encrypt these set of Messages
+    //Step 5a. Make reverse Map
+    this->encryptMap = reverseMap(this->decryptMap);
+
+    //Step 5b. Pass QStrings through reverseMap, and get corresponding encrypted string
+    QString messageOutput;
+    int rebelBaseCount = this->vertices.length();
+    int i;
+    decryption Dec;
+
+    for ( i = 0 ; i < rebelBaseCount ; i++ )
+    {
+        messageOutput = this->editedMessages[this->graphColor[i]];
+        qDebug() << "got messageOutput" << messageOutput;
+        messageOutput = Dec.getDecrypted(messageOutput,this->encryptMap);
+        qDebug() << "got encrypted Output" << messageOutput;
+        out << messageOutput << "\n";
+
+    }
+
+    //Step 7. Save and Exit
+    oFile.flush();
+    oFile.close();
+    inFile.close();
 
 }
 
@@ -133,7 +208,7 @@ void MainWindow::on_pushButton_4_released() //open file
     }
     qDebug() << "File opened successfully";
     this->inFile.setFileName(fileName);
-
+    this->inputFileName = fileName;
     //display graph -- Remove
     //scene = new QGraphicsScene(this);
     //ui->graphicsView->setScene(scene);
@@ -192,11 +267,15 @@ void MainWindow::on_pushButton_4_released() //open file
         this->messages[i] = Dec.getDecrypted(this->messages[i],dMap);
     }
 
+    //Edit Messages
+    QList <QString> eMsgs = editMessages();
+    this->editedMessages = eMsgs;
 
     //Test Print
     qDebug() << "Vertices (Rebel Bases) : " << this->vertices;
     qDebug() << "Edges (Communication Channels) : " << this->edges;
     qDebug() << "Messages :" << this->messages;
+    qDebug() << "Edited Messages: " << this->editedMessages;
 
 
     //Form Graph
@@ -210,8 +289,10 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     //Make QMap to index each rebel base to a number
 
     int rebelBaseCount = this->vertices.length();
+    int i;
+
+    /*
     int spacePos;
-    int i,temp;
     QString base1;
     QString base2;
     QMap <QString, int> baseIndex;
@@ -257,9 +338,15 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
 
     qDebug() << "Fake messages generated: ";
 
+    */
+
+    QString messageOutput;
+    messageOutput = QString::number(messageCount);
+    messageOutput = messageOutput + "\n";
+
     for ( i = 0 ; i < rebelBaseCount ; i++ )
     {
-        messageOutput = messageOutput + this->vertices[i] + ": " + fakeMsgs[g1Color[i]] + "\n";
+        messageOutput = messageOutput + this->vertices[i] + ": " + this->editedMessages[this->graphColor[i]] + "\n";
     }
 
     /*
@@ -325,6 +412,7 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     */
 
 
+    /*
     graphColoring g2(5);
     g2.addEdge(0, 1);
     g2.addEdge(0, 2);
@@ -335,13 +423,34 @@ void MainWindow::on_pushButton_5_released() //Edit Messages
     qDebug() << "\nColoring of Graph 2 \n";
     QVector <int> g2Color = g2.greedyColoring();
     qDebug() << g2Color;
-
+*/
 
     //Show message count
 
     //Show messages
 
 
+}
+
+QMap<char, char> MainWindow::reverseMap(QMap<char, char> input)
+{
+    QMap <char, char> output;
+    qDebug() << "in reverse map";
+    output.insert('.','.');
+    output.insert(' ', ' ');
+    char allChar[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',\
+                    'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',\
+                    'y', 'z'};
+    int i;
+    char temp;
+    for  ( i = 0 ; i < 26; i ++ )
+    {
+        temp = input[allChar[i]];
+        output.insert(temp, allChar[i]);
+    }
+    qDebug() << output;
+    qDebug() << "returning from reverse Map";
+    return output;
 }
 
 QString MainWindow::getNewsParagraph()
@@ -478,4 +587,56 @@ QList<QString> MainWindow::getMessages()
 
     inFile.close();
     return list;
+}
+
+QList<QString> MainWindow::editMessages()
+{
+
+    int rebelBaseCount = this->vertices.length();
+    int spacePos;
+    int i,temp;
+    QString base1;
+    QString base2;
+    QMap <QString, int> baseIndex;
+    for ( i = 0; i < rebelBaseCount; i++)
+    {
+        baseIndex [this->vertices[i]] = i;
+    }
+
+    int channelCount = this->edges.length();
+    graphColoring g1(rebelBaseCount);
+    for (i = 0; i < channelCount; i++)
+    {
+        spacePos = this->edges[i].indexOf(' ');
+        base1=this->edges[i].left(spacePos);
+        temp = this->edges[i].length() - spacePos -1;
+        base2=this->edges[i].right(temp);
+        qDebug() << "Test of Base Index";
+        qDebug() << baseIndex[base1];
+        qDebug() << baseIndex[base2];
+        g1.addEdge(baseIndex[base1], baseIndex[base2]);
+
+        //--- test printing----
+        qDebug()<<"Base1:"<<base1<<"Base2:"<<base2;
+    }
+
+
+    qDebug() << "Coloring of graph";
+    QVector <int> g1Color = g1.greedyColoring();
+    qDebug() << "vector is: " << g1Color;
+    //now making initial message the most used message
+    g1Color = g1.sortMessages(rebelBaseCount,g1Color);
+    qDebug() << "Sorted Vector is : " << g1Color;
+
+    this->messageCount = g1.messageCount(rebelBaseCount, g1Color);
+
+    basicDictionary bd;
+
+    QList <QString> fakeMsgs = bd.getWordList(this->messages[0], messageCount);
+
+    qDebug() << "Fake messages generated: ";
+
+    this->graphColor = g1Color;
+
+    return fakeMsgs;
 }

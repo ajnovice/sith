@@ -1,3 +1,6 @@
+This project has been made in Qt. Qt is a cross platform application framework
+which practically runs in most devices.
+
 To install the project, one of the following two ways can be used:
 
 1. Using Qt SDK
@@ -5,20 +8,23 @@ To install the project, one of the following two ways can be used:
 
 After installing the Qt SDK, you'll have the Qt IDE also known as QtCreator.
 Open the sith.pro file in QtCreator and then proceed to the "Run" button. The
-project may ask for the build details, and directory where the software is to 
+project may ask for the build details, and directory where the software is to
 be built. This though being a more heavyweight installation, is far easier to
-use.
+use. The Qt SDK can be downloaded from:
+http://qt-project.org/downloads
 
 2. Using QMake
 --------------
 
-Qt has it's own version of CMake, where it requires the .pro file instead of the
-standard MakeFile
+Qt has it's own version of CMake, where it requires the .pro file instead of
+the standard MakeFile
 
 To generate the makefile for the application if not present, would be:
 On the command line, in your project's directory, type the following:
 
    qmake -o Makefile <project-name>.pro
 
-This would create the Makefile after which is the stand CMake and Make installation.
-I personally would still recommend Way 1.
+This would create the Makefile after which is the stand CMake and Make
+installation. I personally would still recommend Way 1. Further information
+about QMake can be found in:
+http://qt-project.org/doc/qt-4.8/qmake-tutorial.html
