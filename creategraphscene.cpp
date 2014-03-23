@@ -6,7 +6,7 @@ CreateGraphScene::CreateGraphScene()
 {
 }
 
-void CreateGraphScene::SetGraph(int rows, int columns, QVector2D inputGraph)
+void CreateGraphScene::SetGraph(int rows, int columns, QVector<QVector<int> > inputGraph)
 {
     graph = inputGraph;
 }

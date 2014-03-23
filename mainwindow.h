@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFile>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QMap>
 
 namespace Ui {
@@ -44,6 +45,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
+    QGraphicsView* graphView;
     QGraphicsEllipseItem* ellipse;
     QGraphicsRectItem* rectangle;
     QGraphicsTextItem* text;

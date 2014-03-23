@@ -18,7 +18,7 @@
 #include <QGraphicsEllipseItem>
 #include <QTextStream>
 #include <QMap>
-
+#include <QPair>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -84,23 +84,26 @@ void MainWindow::on_pushButton_2_released() // show graph
 //        string1=this->edges.left(index);
 //        string2=this->edges.right(index+1);
 //    }
+    int temp, index;
     QMap<QString,int> map;
+    CreateGraphScene cgs;
     int no_of_nodes=this->vertices.length();
     int no_of_chhanel= this->edges.length();
     for(int i=0;i<no_of_nodes;i++)
     {
         map.insert(vertices[i],i+1);
     }
-    QMap<QString,int>::iterator p1,p2;
-    for(int i=0;i<no_of_chhanel;i++)
+
+    for(int i=0; i < no_of_chhanel; i++)
     {
-        int index=pair.indexOf(' ');
-        string1=this->edges.left(index);
-        string2=this->edges.right(index+1);
-        p1=map.find(string1);
-        p2=map.find(string2);
-        graph[p1->second][p2->second]=1;
-        graph[p2->second][p1->second]=1;
+        index   = this->edges[i].indexOf(' ');
+        temp    = this->edges[i].length() - index -1;
+        string1 = this->edges[i].left(index);
+        string2 = this->edges[i].right(temp);
+
+
+        //cgs.graph[map[string1]][map[string2]] = 1;
+        //cgs.graph[map[string2]][map[string1]] = 1;
 
     }
 

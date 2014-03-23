@@ -16,12 +16,24 @@ public:
     QGraphicsEllipseItem* ellipse;
     QGraphicsRectItem* rectangle;
 
-    QList<QPair<QString,int> > pair;
-    void SetGraph(int, int, QVector2D);
-    void drawGraph();
 
-private:
-    QVector2D graph;
+
+
+
+    /**
+     * @brief SetGraph
+     * sets the basic graph model
+     * @param rows
+     * @param columns
+     * @param inputGraph
+     */
+    void SetGraph(int rows, int columns, QVector<QVector<int> > inputGraph);
+
+    void drawGraph();
+    QVector < QVector < int > > graph;
+
+//private:
+
 
 
 
