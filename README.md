@@ -1,4 +1,4 @@
-sith
+sith (Won the first prize at Dev Wars - Instruo 2014, BESU)
 ====
 
 TODO
